@@ -21,7 +21,7 @@ const Register = () => {
     setInput({ ...input, [e.target.name]: e.target.value });
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = () => {
     if (input.name === "") {
       inputRef.current.focus();
     }
