@@ -2,7 +2,6 @@ import { useState, useMemo } from "react";
 import "./List.css"
 import TodoItem from "./TodoItem";
 
-
 const List = ({todos, onUpdate, onDelete}) => {
 
   const [search, setSearch] = useState("");
