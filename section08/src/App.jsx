@@ -1,26 +1,67 @@
 import "./App.css";
-import { useState } from "react";
-import Today from "./components/Today";
-import AddTodo from "./components/AddTodo";
-import SearchTodo from "./components/SearchTodo";
-import ListTodo from "./components/ListTodo";
+import { useState, useRef } from "react";
+import List from "./components/List";
+import Header from "./components/Header";
+import Editor from "./components/Editor";
+
+const mockData = [
+  {
+    id:0,
+    isDone:false,
+    content: "React 공부하기",
+    date:new Date().getTime(),
+  },
+  {
+    id:1,
+    isDone:false,
+    content: "빨래하기",
+    date:new Date().getTime(),
+  },
+  {
+    id:2,
+    isDone:false,
+    content: "노래 연습하기",
+    date:new Date().getTime(),
+  },
+];
 
 function App() {
-  const todate = new Date();
 
-  const [todos, setTodos] = useState([
-    "React 공부하기",
-    "빨래하기",
-    "노래 연습하기",
-  ]);
+  const idRef = useRef(3);
+  
+  const [todos, setTodos] = useState(mockData);
+
+  const onCreate = (content) => {
+    const newTodo = {
+      id:idRef.current++,
+      isDone:false,
+      content:content,
+      date:new Date().getTime()
+    };
+
+    setTodos([newTodo, ...todos])
+  }
+
+  const onUpdate = (tagetId) => {
+    setTodos(
+      todos.map((todo) => todo.id === tagetId ? {...todo, isDone:!todo.isDone}:todo        
+      )
+    );
+
+  }
+
+  const onDelete = (targetId) => {
+    setTodos(
+      todos.filter((todo) => todo.id !== targetId)
+    );
+  }
 
   return (
-    <>
-      <Today todate={todate} />
-      <AddTodo todate={todate} todos={todos} setTodos={setTodos} />
-      <SearchTodo todos={todos} setTodos={setTodos} />
-      <ListTodo todate={todate} todos={todos} setTodos={setTodos} />
-    </>
+    <div className="App">
+      {<Header/>}
+      <Editor onCreate={onCreate}/>
+      <List todos={todos} onUpdate={onUpdate} onDelete={onDelete} />
+    </div>
   );
 }
 
