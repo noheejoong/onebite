@@ -4,7 +4,7 @@ import emotion3 from '../assets/emotion3.png'
 import emotion4 from '../assets/emotion4.png'
 import emotion5 from '../assets/emotion5.png'
 
-const getEmotionImage = (id) => {
+export const getEmotionImage = (id) => {
   switch (id) {
     case 1:
       return emotion1
@@ -18,5 +18,3 @@ const getEmotionImage = (id) => {
       return emotion5
   }
 }
-
-export default getEmotionImage

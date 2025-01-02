@@ -10,15 +10,21 @@ import NotFound from "./pages/NotFound";
 const mockData = [
   {
     id: 1,
-    createdDate: new Date().getTime(),
+    createdDate: new Date('2025-01-02').getTime(),
     emotionId: 1,
     content: "1번 일기입니다.",
   },
   {
     id: 2,
-    createdDate: new Date().getTime(),
+    createdDate: new Date('2025-01-01').getTime(),
     emotionId: 2,
     content: "2번 일기입니다.",
+  },
+  {
+    id: 4,
+    createdDate: new Date('2024-12-01').getTime(),
+    emotionId: 3,
+    content: "3번 일기입니다.",
   },
 ];
 
@@ -37,8 +43,8 @@ function reducer(state, action) {
   }
 }
 
-const DairyStateContext = createContext();
-const DiaryDispatchContext = createContext();
+export const DiaryStateContext = createContext();
+export const DiaryDispatchContext = createContext();
 
 function App() {
   const idRef = useRef(3);
@@ -79,7 +85,7 @@ function App() {
 
   return (
     <>
-      <DairyStateContext.Provider value={data}>
+      <DiaryStateContext.Provider value={data}>
         <DiaryDispatchContext.Provider value={{ onCreate, onUpdate, onDelete }}>
           <Routes>
             <Route path="/" element={<Home />} />
@@ -89,7 +95,7 @@ function App() {
             <Route path="*" element={<NotFound />} />
           </Routes>
         </DiaryDispatchContext.Provider>
-      </DairyStateContext.Provider>
+      </DiaryStateContext.Provider>
     </>
   );
 }
