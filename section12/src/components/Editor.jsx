@@ -77,7 +77,15 @@ const Editor = () => {
                 <h4>오늘의 감정</h4>
                 <div className="emotion_list_wrapper">
                 {emotionData.map((item)=> {
-                    return <EmotionItem key={item.emotionId} {...item} isSelected={item.emotionId===emotionId} />
+                    return <EmotionItem onClick={()=>onChangeInput({
+                        target: {
+                            name:"emotionId",
+                            value: item.emotionId,
+                        },
+                    })} 
+                    key={item.emotionId} 
+                    {...item} 
+                    isSelected={item.emotionId===emotionId} />
                 })}
                 </div>
             </section>
